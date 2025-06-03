@@ -12,7 +12,9 @@ export class AppComponent implements OnInit {
   title = 'consome-portal-app';
 
   // urlbase: string = 'http://52.20.6.162:8080';
-  urlbase: string = 'https://portal.totvs.com.br';
+  // urlbase: string = 'https://portal.totvs.com.br:4443';
+  // urlbase: string = 'http://es-datasul.sp01.local:8880';
+  urlbase: string = 'https://engjv.datasul.cloudtotvs.com.br:48880/';
 
   async ngOnInit() {
     const token = await this.autenticate();
@@ -98,8 +100,16 @@ export class AppComponent implements OnInit {
         "password": "174b063a7d7e684004d94f4965b52ad9",
         "clinic": 10026,
         "cnpjClinic": "03.151.186/0001-78",
-        "provider": 31921,
+        "provider": 31923,
         "beneficiaryCard": "01200108959000048"
+
+
+        // "user": "daniel.jose",
+        // "password": "174b063a7d7e684004d94f4965b52ad9",
+        // "clinic": 10026,
+        // "cnpjClinic": "03.151.186/0001-78",
+        // "provider": 110005,
+        // "beneficiaryCard": "01200108959000048"
         
         // "user": "31921",
         // "password": "1e0a55d2ab93ff0fec2dc379284f05b3",
@@ -133,7 +143,7 @@ export class AppComponent implements OnInit {
   private initializeEventListeners(){
     window.addEventListener("message", (event) => {
       // Verifique a origem da mensagem para evitar problemas de segurança
-      if (event.origin !== "${this.urlbase}") return;
+      // if (event.origin !== "${this.urlbase}") return;
   
       if (event.data.event === "savedConsultationRegister") {
           console.log("Registro de consulta: ", event.data);
@@ -144,34 +154,37 @@ export class AppComponent implements OnInit {
           console.log("Solicitação de exame: ", event.data);
           alert("O Solicitação de exame foi salvo com sucesso!");
       }
+
+      if (event.data.event === "checkinCompleted") {
+          console.log("checkin: ", event.data);
+          alert("O checkin foi salvo com sucesso!");
+      }
     });
   }
 
-  async teste() {
-    console.log('testeeeee', this.token);
+async checkElegibility() {
 
-    const bodyRequest = JSON.stringify({
-      "provider": 31921,
-      "healthInsurerProvider": 120,
-      "completeCardNumber": "01200108959000048"
-    });
+  const bodyRequest = JSON.stringify({
+    "provider": 31921,
+    "healthInsurerProvider": 120,
+    "completeCardNumber": "01200108959000048"
+  });
 
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'authorization': `Bearer ${this.elegibilityToken}`,
-            'x-totvs-hgp-portal-prestador-clinic': '10026'
-        },
-        body: bodyRequest
-    };
+  const options = {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'authorization': `Bearer ${this.elegibilityToken}`,
+          'x-totvs-hgp-portal-prestador-clinic': '10026'
+      },
+      body: bodyRequest
+  };
 
 
-    const result = await fetch('${this.urlbase}/dts/datasul-rest/resources/prg/portprest/v1/elegibility', options) ?? ""; 
-    let res = await result.json()
-    console.log('res', res);
-    
-  }
+  const result = await fetch(`${this.urlbase}/dts/datasul-rest/resources/prg/portprest/v1/elegibility`, options) ?? ""; 
+  let res = await result.json()
+  
+}
 
   testeDireto(){
     let existingIframe = document.getElementById("port-prest-iframe");
@@ -181,7 +194,7 @@ export class AppComponent implements OnInit {
 
 
     let iframe = document.createElement("iframe");
-    iframe.setAttribute("src", `${this.urlbase}/totvs-hgp-portal-prestador/#/consultation-register?token=${this.token}`);
+    iframe.setAttribute("src", `${this.urlbase}/totvs-hgp-portal-prestador/#/exam-registry?token=${this.token}`);
     iframe.setAttribute("id", 'port-prest-iframe');
     iframe.setAttribute("frameborder", "0");
     iframe.style.width = "100%";
@@ -191,18 +204,22 @@ export class AppComponent implements OnInit {
   }
 
   novoCheckin(){
-    this.renderIframe('checkin.js');
+    this.renderIframe('checkin.js', 'divIframeCheckin');
   }
 
   novoRegistroConsulta(){
-    this.renderIframe('consultation-register.js');
+    this.renderIframe('consultation-register.js', 'divIframeConsultationRegister');
   }
 
   novaSolcitacaoExames(){
     this.renderIframe('exam-request.js');
   }
 
-  renderIframe(program:string){
+  novaSolcitacaoInternacao(){
+    this.renderIframe('hospitalization-request.js');
+  }
+
+  renderIframe(program:string, divName:string = 'divIframe') {
     const options = {
         method: 'GET',
         headers: {
@@ -216,10 +233,10 @@ export class AppComponent implements OnInit {
       if (!response.ok) {
         throw new Error("Erro ao buscar módulo embedado");
       }
-      return response.text(); // o Java retorna HTML
+      return response.text(); 
     })
     .then(html => {      
-      const divIframe = document.getElementById('divIframe');
+      const divIframe = document.getElementById(divName);
       if (divIframe) {
         divIframe.innerHTML = html;
       } else {

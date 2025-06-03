@@ -1,18 +1,43 @@
-<div style="background-color: red;">
+<div>
   <h1>
   
-    <div id="divIframe" #divIframe>
-  
+    <style>
+      .container {
+        display: flex;
+        gap: 10px;
+      }
+
+      .divIframeDividido {
+        height: 500px;
+        width: 500px;
+        border: 1px solid black;
+      }
+
+      .divIframeFull {
+        height: 90vh;
+        width: 100%;
+        border: 1px solid black;
+      }
+    </style>
+    <div class="container">
+      <div id="divIframe" #divIframe class="divIframeFull">
+      </div>
+      <!-- <div id="divIframeConsultationRegister" #divIframeConsultationRegister class="divIframeDividido">
+      </div> -->
+      <!-- <div id="divIframeCheckin" #divIframeCheckin class="divIframeFull">
+      </div> -->
     </div>
   
-    <button type="button" (click)="teste()">Consultar elegibilidade</button>
+    <!-- <button type="button" (click)="teste()">Consultar elegibilidade</button> -->
     <!-- <button type="button" (click)="consultationRegister()">Registro de consulta</button>
     <button type="button" (click)="examRequest()">Solicitação de exames</button>
     <button type="button" (click)="testeDireto()">Registro de consulta direto</button> -->
-    <button type="button" (click)="novoRegistroConsulta()">Novo Registro de consulta</button>
-    <button type="button" (click)="novaSolcitacaoExames()">Nova Solicitação de exames</button>
+    <!-- <button type="button" (click)="novoRegistroConsulta()">Novo Registro de consulta</button> -->
+    <!-- <button type="button" (click)="novaSolcitacaoExames()">Nova Solicitação de exames</button> -->
     <button type="button" (click)="novoCheckin()">Novo checkin</button>
-    <button type="button" (click)="newInternment()">Internação</button>
+    <button type="button" (click)="novaSolcitacaoInternacao()">Solic Internacao</button>
+    <!-- <button type="button" (click)="newInternment()">Internação</button> -->
+    <!-- <button type="button" (click)="testeDireto()">Registro exames direto</button> -->
   
   </h1>
 </div>
