@@ -204,11 +204,11 @@ async checkElegibility() {
   }
 
   novoCheckin(){
-    this.renderIframe('checkin.js', 'divIframeCheckin');
+    this.renderIframe('checkin.js', 'divIframe');
   }
 
   novoRegistroConsulta(){
-    this.renderIframe('consultation-register.js', 'divIframeConsultationRegister');
+    this.renderIframe('consultation-register.js', 'divIframe');
   }
 
   novaSolcitacaoExames(){
