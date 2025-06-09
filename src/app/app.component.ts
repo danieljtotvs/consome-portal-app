@@ -96,7 +96,14 @@ export class AppComponent implements OnInit {
         // "provider": 31921,
         // "beneficiaryCard": "01200108959000048"
 
-        "user": "daniel.jose",
+        // "user": "daniel.jose",
+        // "password": "174b063a7d7e684004d94f4965b52ad9",
+        // "clinic": 10026,
+        // "cnpjClinic": "03.151.186/0001-78",
+        // "provider": 31923,
+        // "beneficiaryCard": "01200108959000048"
+
+        "user": "31923",
         "password": "174b063a7d7e684004d94f4965b52ad9",
         "clinic": 10026,
         "cnpjClinic": "03.151.186/0001-78",
