@@ -19,6 +19,9 @@
         border: 1px solid black;
       }
     </style>
+    <div *ngIf="auth">OK</div> 
+    <div *ngIf="!auth">NOK</div> 
+
     <div class="container">
       <div id="divIframe" #divIframe class="divIframeFull">
       </div>
@@ -32,11 +35,18 @@
     <!-- <button type="button" (click)="consultationRegister()">Registro de consulta</button>
     <button type="button" (click)="examRequest()">Solicitação de exames</button>
     <button type="button" (click)="testeDireto()">Registro de consulta direto</button> -->
-    <!-- <button type="button" (click)="novoRegistroConsulta()">Registro de consulta</button>
-    <button type="button" (click)="novaSolcitacaoExames()">Solicitação de exames</button> -->
+     <button type="button" (click)="novoRegistroConsulta()">Registro de consulta</button>
+    <button type="button" (click)="novaSolcitacaoExames()">Solicitação de exames</button>
     <button type="button" (click)="novoCheckin()">Checkin</button>
-    <!-- <button type="button" (click)="novaSolcitacaoInternacao()">Solic Internacao</button> -->
-    <!-- <button type="button" (click)="newInternment()">Internação</button> -->
+     <button type="button" (click)="novaSolcitacaoInternacao()">Solic Internacao</button>
+     <button type="button" (click)="novoRegExame()">Reg Exame</button>
+     <button type="button" (click)="novaPerfilMedico()">Perfil Medico</button>
+     <button type="button" (click)="novaPerfilMedicoApelidos()">Perfil Medico-Apelidos</button>
+     <button type="button" (click)="novaPerfilMedicoFavoritos()">Perfil Medico-Favoritos</button>
+     <button type="button" (click)="novaPerfilMedicoPacote()">Perfil Medico-Pacote</button>
+     <button type="button" (click)="novaPerfilMedicoProd()">Perfil Medico-Prod Medica</button>
+
+    <!--<button type="button" (click)="newInternment()">Internação</button>-->
     <!-- <button type="button" (click)="testeDireto()">Registro exames direto</button> -->
   
   </h1>

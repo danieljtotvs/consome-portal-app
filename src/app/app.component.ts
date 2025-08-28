@@ -12,12 +12,18 @@ export class AppComponent implements OnInit {
   title = 'consome-portal-app';
 
   // urlbase: string = 'http://52.20.6.162:8080';
-  urlbase: string = 'https://portal.totvs.com.br:4443';
+  //urlbase: string = 'https://portal.totvs.com.br:4443';
   // urlbase: string = 'http://es-datasul.sp01.local:8880';
-  // urlbase: string = 'https://engjv.datasul.cloudtotvs.com.br:48880/';
+  //urlbase: string = 'https://engjv.datasul.cloudtotvs.com.br:48880';
+  urlbase: string = 'https://portalprestador.totvs.com.br:4443';
+  //urlbase: string = 'http://localhost:8280'
+
+  auth = false;
 
   async ngOnInit() {
-    const token = await this.autenticate();
+    let token = await this.autenticate();
+
+    //token = '123';
 
     if (token) {
       this.token = token;
@@ -89,12 +95,12 @@ export class AppComponent implements OnInit {
   private async autenticate() {
     const bodyRequest = JSON.stringify({
 
-        // "user": "31921",
-        // "password": "1e0a55d2ab93ff0fec2dc379284f05b3",
-        // "cnpjClinic": "03.151.186/0001-78",
-        // "clinic": 10026,
-        // "provider": 31921,
-        // "beneficiaryCard": "01200108959000048"
+         //"user": "31921",
+         //"password": "6657a66f2419358f2267c7788a6dabb8",
+         //"cnpjClinic": "03.151.186/0001-78",
+         //"clinic": 10026,
+         //"provider": "31921",
+         //"beneficiaryCard": "01200108959000048"
 
         // "user": "daniel.jose",
         // "password": "174b063a7d7e684004d94f4965b52ad9",
@@ -103,13 +109,13 @@ export class AppComponent implements OnInit {
         // "provider": 31923,
         // "beneficiaryCard": "01200108959000048"
 
+        
         "user": "31923",
-        "password": "174b063a7d7e684004d94f4965b52ad9",
+        "password": "6657a66f2419358f2267c7788a6dabb8",
         "clinic": 10026,
         "cnpjClinic": "03.151.186/0001-78",
         "provider": 31923,
-        "beneficiaryCard": "01200108959000048"
-
+        "beneficiaryCard": "01200108959000048"        
 
         // "user": "daniel.jose",
         // "password": "174b063a7d7e684004d94f4965b52ad9",
@@ -144,6 +150,11 @@ export class AppComponent implements OnInit {
     const result = await fetch(`${this.urlbase}/totvs-hgp-haw-auth/api/external-authentication`, options) ?? ""; 
     const { externalToken, token } = await result.json();
     this.elegibilityToken = token;
+
+    if(token) {
+      this.auth = true;
+    }
+
     return externalToken;
   }
   
@@ -165,6 +176,11 @@ export class AppComponent implements OnInit {
       if (event.data.event === "checkinCompleted") {
           console.log("checkin: ", event.data);
           alert("O checkin foi salvo com sucesso!");
+      }
+
+      if(event.data.event === "savedExamRegistry") {
+          console.log("Registro de exame: ", event.data);
+          alert("O Registro de exame foi salvo com sucesso!");
       }
     });
   }
@@ -214,6 +230,10 @@ async checkElegibility() {
     this.renderIframe('checkin.js', 'divIframe');
   }
 
+  novoRegExame() {
+    this.renderIframe('exam-registry.js', 'divIframe');
+  }
+
   novoRegistroConsulta(){
     this.renderIframe('consultation-register.js', 'divIframe');
   }
@@ -224,6 +244,26 @@ async checkElegibility() {
 
   novaSolcitacaoInternacao(){
     this.renderIframe('hospitalization-request.js');
+  }
+
+  novaPerfilMedico(){
+    this.renderIframe('medical-profile.js');
+  }
+
+  novaPerfilMedicoApelidos(){
+    this.renderIframe('medical-profile-nickname.js');
+  }
+
+  novaPerfilMedicoPacote() {
+    this.renderIframe('medical-profile-package.js');
+  }
+
+  novaPerfilMedicoProd() {
+    this.renderIframe('medical-profile-medical-production.js');
+  }
+
+  novaPerfilMedicoFavoritos() {
+    this.renderIframe('medical-profile-favorites.js');
   }
 
   renderIframe(program:string, divName:string = 'divIframe') {
@@ -245,6 +285,7 @@ async checkElegibility() {
     .then(html => {      
       const divIframe = document.getElementById(divName);
       if (divIframe) {
+        //html = html.replace('token=','token=abc');
         divIframe.innerHTML = html;
       } else {
         console.error("Elemento 'divIframe' não encontrado.");
