@@ -14,9 +14,10 @@ export class AppComponent implements OnInit {
   // urlbase: string = 'http://52.20.6.162:8080';
   //urlbase: string = 'https://portal.totvs.com.br:4443';
   // urlbase: string = 'http://es-datasul.sp01.local:8880';
-  //urlbase: string = 'https://engjv.datasul.cloudtotvs.com.br:48880';
-  urlbase: string = 'https://portalprestador.totvs.com.br:4443';
-  //urlbase: string = 'http://localhost:8280'
+  urlbase: string = 'https://engjv.datasul.cloudtotvs.com.br:48880';
+  // urlbase: string = 'https://portalprestador.totvs.com.br:4443';
+  // urlbase: string = 'https://portal.totvs.com.br:4443';
+  //urlbase: string = 'http://localhost:8280' 
 
   auth = false;
 
@@ -95,27 +96,34 @@ export class AppComponent implements OnInit {
   private async autenticate() {
     const bodyRequest = JSON.stringify({
 
-         //"user": "31921",
-         //"password": "6657a66f2419358f2267c7788a6dabb8",
-         //"cnpjClinic": "03.151.186/0001-78",
-         //"clinic": 10026,
-         //"provider": "31921",
-         //"beneficiaryCard": "01200108959000048"
+        //  "user": "31921",
+        //  "password": "6657a66f2419358f2267c7788a6dabb8",
+        //  "cnpjClinic": "03.151.186/0001-78",
+        //  "clinic": 10026,
+        //  "provider": "31921",
+        //  "beneficiaryCard": "01200108959000048"
 
-        // "user": "daniel.jose",
-        // "password": "174b063a7d7e684004d94f4965b52ad9",
-        // "clinic": 10026,
-        // "cnpjClinic": "03.151.186/0001-78",
-        // "provider": 31923,
-        // "beneficiaryCard": "01200108959000048"
-
-        
-        "user": "31923",
+        "user": "daniel.jose",
         "password": "6657a66f2419358f2267c7788a6dabb8",
         "clinic": 10026,
         "cnpjClinic": "03.151.186/0001-78",
-        "provider": 31923,
-        "beneficiaryCard": "01200108959000048"        
+        "provider": 31921,
+        "beneficiaryCard": "01200108959000048"
+
+        // "user": "secretariateste",
+        // "password": "261c3b26b737ffc731837e1e35d17b9c",
+        // "clinic": 10026,
+        // "cnpjClinic": "03.151.186/0001-78",
+        // "provider": 31921,
+        // "beneficiaryCard": "01200108959000048"
+
+        
+        // "user": "31923",
+        // "password": "6657a66f2419358f2267c7788a6dabb8",
+        // "clinic": 10026,
+        // "cnpjClinic": "03.151.186/0001-78",
+        // "provider": 31923,
+        // "beneficiaryCard": "01200108959000048"        
 
         // "user": "daniel.jose",
         // "password": "174b063a7d7e684004d94f4965b52ad9",
