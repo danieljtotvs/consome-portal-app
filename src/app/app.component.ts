@@ -96,19 +96,19 @@ export class AppComponent implements OnInit {
   private async autenticate() {
     const bodyRequest = JSON.stringify({
 
-         "user": "31921",
-         "password": "6657a66f2419358f2267c7788a6dabb8",
-         "cnpjClinic": "03.151.186/0001-78",
-         "clinic": 10026,
-         "provider": "31921",
+        //  "user": "31921",
+        //  "password": "6657a66f2419358f2267c7788a6dabb8",
+        //  "cnpjClinic": "03.151.186/0001-78",
+        //  "clinic": 10026,
+        //  "provider": "31921",
         //  "beneficiaryCard": "01200108959000048"
 
-        // "user": "daniel.jose",
-        // "password": "6657a66f2419358f2267c7788a6dabb8",
-        // "clinic": 10026,
-        // "cnpjClinic": "03.151.186/0001-78",
-        // "provider": 31921,
-        // "beneficiaryCard": "01200108959000048"
+        "user": "daniel.jose",
+        "password": "6657a66f2419358f2267c7788a6dabb8",
+        "clinic": 10026,
+        "cnpjClinic": "03.151.186/0001-78",
+        "provider": 31921,
+        "beneficiaryCard": "01200108959000048"
 
         // "user": "secretariateste",
         // "password": "261c3b26b737ffc731837e1e35d17b9c",
