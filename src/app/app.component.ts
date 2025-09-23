@@ -104,11 +104,11 @@ export class AppComponent implements OnInit {
         //  "beneficiaryCard": "01200108959000048"
 
         "user": "daniel.jose",
-        "password": "6657a66f2419358f2267c7788a6dabb8",
+        "password": "261c3b26b737ffc731837e1e35d17b9c",
         "clinic": 10026,
         "cnpjClinic": "03.151.186/0001-78",
         "provider": 31921,
-        "beneficiaryCard": "01200108959000048"
+        // "beneficiaryCard": "01200108959000048"
 
         // "user": "secretariateste",
         // "password": "261c3b26b737ffc731837e1e35d17b9c",
@@ -126,7 +126,7 @@ export class AppComponent implements OnInit {
         // "beneficiaryCard": "01200108959000048"        
 
         // "user": "daniel.jose",
-        // "password": "174b063a7d7e684004d94f4965b52ad9",
+        // "password": "261c3b26b737ffc731837e1e35d17b9c",
         // "clinic": 10026,
         // "cnpjClinic": "03.151.186/0001-78",
         // "provider": 110005,
@@ -278,8 +278,16 @@ async checkElegibility() {
     this.renderIframe('beneficiary-guides.js');
   }
 
+  titulosDoPrestador() {
+    this.renderIframe('provider-payment-titles.js');
+  }
+
   mensageria() {
     this.renderIframe('messaging.js');
+  }
+
+  demonstrativoInss() {
+    this.renderIframe('demonstrative-inss.js');
   }
 
   renderIframe(program:string, divName:string = 'divIframe') {
