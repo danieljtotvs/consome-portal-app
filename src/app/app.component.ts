@@ -108,7 +108,7 @@ export class AppComponent implements OnInit {
         "clinic": 10026,
         "cnpjClinic": "03.151.186/0001-78",
         "provider": 31921,
-        // "beneficiaryCard": "01200108959000048"
+        "beneficiaryCard": "01200108959000048"
 
         // "user": "secretariateste",
         // "password": "261c3b26b737ffc731837e1e35d17b9c",
@@ -288,6 +288,22 @@ async checkElegibility() {
 
   demonstrativoInss() {
     this.renderIframe('demonstrative-inss.js');
+  }
+
+  solicitacoesTissPrestador() {
+    this.renderIframe('provider-tiss-guides.js');
+  }
+
+  historicoAtendimentos() {
+    this.renderIframe('attendance-history.js');
+  }
+
+  justificativaReconsulta() {
+    this.renderIframe('justification-reconsultation.js');
+  }
+
+  reimpressaoDocumentos() {
+    this.renderIframe('reprinting-documents.js');
   }
 
   renderIframe(program:string, divName:string = 'divIframe') {
