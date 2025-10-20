@@ -16,7 +16,8 @@ export class AppComponent implements OnInit {
   // urlbase: string = 'http://es-datasul.sp01.local:8880';
   // urlbase: string = 'https://engjv.datasul.cloudtotvs.com.br:48880';
   // urlbase: string = 'https://portalprestador.totvs.com.br:4443';
-  urlbase: string = 'https://portal.totvs.com.br:4443';
+  // urlbase: string = 'https://portal.totvs.com.br:4443';
+  urlbase: string = 'https://engjv.datasul.cloudtotvs.com.br:48280'; //sistemico
   // urlbase: string = 'http://localhost:8280' 
 
   auth = false;
@@ -96,12 +97,20 @@ export class AppComponent implements OnInit {
   private async autenticate() {
     const bodyRequest = JSON.stringify({
 
-         "user": "31921",
-         "password": "6657a66f2419358f2267c7788a6dabb8",
-         "cnpjClinic": "03.151.186/0001-78",
-         "clinic": 10026,
-         "provider": "31921",
-         "beneficiaryCard": "01200108959000048"
+      //sistemico
+      "user": "jessica",
+      "password": "6657a66f2419358f2267c7788a6dabb8",
+      "clinic": 10026,
+      "cnpjClinic": "",
+      "provider": 31921,
+      "beneficiaryCard": "01201000643000017"
+
+        //  "user": "31921",
+        //  "password": "6657a66f2419358f2267c7788a6dabb8",
+        //  "cnpjClinic": "03.151.186/0001-78",
+        //  "clinic": 10026,
+        //  "provider": "31921",
+        //  "beneficiaryCard": "01200108959000048"
 
         // "user": "daniel.jose",
         // "password": "261c3b26b737ffc731837e1e35d17b9c",
