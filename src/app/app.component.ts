@@ -17,9 +17,11 @@ export class AppComponent implements OnInit {
   // urlbase: string = 'http://52.20.6.162:8080';
   //urlbase: string = 'https://portal.totvs.com.br:4443';
   // urlbase: string = 'http://es-datasul.sp01.local:8880';
-  //urlbase: string = 'https://engjv.datasul.cloudtotvs.com.br:48880';
-  // urlbase: string = 'https://portal.totvs.com.br:4443';
-  //urlbase: string = 'https://engjv.datasul.cloudtotvs.com.br:48280'; //sistemico
+  // urlbase: string = 'https://engjv.datasul.cloudtotvs.com.br:48880'; //Squad
+  // urlbase: string = 'https://portalprestador.totvs.com.br:4443';
+  //urlbase: string = 'https://portal.totvs.com.br:4443'; //localhost
+  // urlbase: string = 'https://engjv.datasul.cloudtotvs.com.br:48280'; //sistemico externo
+  // urlbase: string = 'http://engjv-tsdock01:8280'; //sistemico interno
   // urlbase: string = 'http://localhost:8280' 
 
   urlbase: string = 'https://portalprestador.totvs.com.br:4443';
@@ -119,8 +121,16 @@ export class AppComponent implements OnInit {
       "password": "6657a66f2419358f2267c7788a6dabb8",
       "cnpjClinic": "03.151.186/0001-78",
       "clinic": 10026,
-      "provider": "31921",
+      "provider": "31921"
       //"beneficiaryCard": "01200109168000016"
+
+      //sistemico
+      // "user": "jessica",
+      // "password": "6657a66f2419358f2267c7788a6dabb8",
+      // "clinic": 10026,
+      // "cnpjClinic": "",
+      // "provider": 31921,
+      // "beneficiaryCard": "01201000643000017"
     });
 
     const options = {
@@ -291,6 +301,18 @@ async checkElegibility() {
 
   reimpressaoDocumentos() {
     this.renderIframe('reprinting-documents.js');
+  }
+
+  outrasDespesas() {
+    this.renderIframe('other-expenses.js', 'divIframe', { beneficiaryCard: this.beneficiaryCard });
+  }
+
+  cancelamento() {
+    this.renderIframe('cancellation.js');
+  }
+
+  prorrogacaoInternacao() {
+    this.renderIframe('internment-extension.js', 'divIframe', { beneficiaryCard: this.beneficiaryCard });
   }
 
   renderIframe(program:string, divName:string = 'divIframe', queryParams?: Record<string, string>) {
