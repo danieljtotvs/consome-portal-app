@@ -25,10 +25,6 @@
     <div class="container">
       <div id="divIframe" #divIframe class="divIframeFull">
       </div>
-      <!-- <div id="divIframeConsultationRegister" #divIframeConsultationRegister class="divIframeDividido">
-      </div> -->
-      <!-- <div id="divIframeCheckin" #divIframeCheckin class="divIframeFull">
-      </div> -->
     </div>
   
     <!-- <button type="button" (click)="teste()">Consultar elegibilidade</button> -->
@@ -61,3 +57,11 @@
   
   </h1>
 </div>
+
+
+<iframe
+  hidden="true"
+  id="wacframe"
+  [src]="url"
+  (load)="onLoad()">
+</iframe>

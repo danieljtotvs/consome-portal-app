@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -10,31 +11,40 @@ export class AppComponent implements OnInit {
   token: string = '';
   elegibilityToken: string = '';
   title = 'consome-portal-app';
+  auth = false;
+  url: SafeResourceUrl;
 
   // urlbase: string = 'http://52.20.6.162:8080';
   //urlbase: string = 'https://portal.totvs.com.br:4443';
   // urlbase: string = 'http://es-datasul.sp01.local:8880';
-  // urlbase: string = 'https://engjv.datasul.cloudtotvs.com.br:48880';
-  // urlbase: string = 'https://portalprestador.totvs.com.br:4443';
+  //urlbase: string = 'https://engjv.datasul.cloudtotvs.com.br:48880';
   // urlbase: string = 'https://portal.totvs.com.br:4443';
-  urlbase: string = 'https://engjv.datasul.cloudtotvs.com.br:48280'; //sistemico
+  //urlbase: string = 'https://engjv.datasul.cloudtotvs.com.br:48280'; //sistemico
   // urlbase: string = 'http://localhost:8280' 
 
-  auth = false;
+  urlbase: string = 'https://portalprestador.totvs.com.br:4443';
+  
+  //Unimed São Roque
+  //urlbase: string = 'https://prestador-homol.unimedsaoroque.com.br';
+  
+  urlAutorizador: string = "https://engjv.datasul.cloudtotvs.com.br:48882/autorizador/pages/external/externalaccess.jsf?isLogin=true";
+  beneficiaryCard = "01201000643000017";
+
+  constructor(private sanitizer: DomSanitizer) {
+    this.url = this.sanitizer.bypassSecurityTrustResourceUrl('');
+  }
 
   async ngOnInit() {
     let token = await this.autenticate();
 
-    //token = '123';
-
     if (token) {
       this.token = token;
-      // this.loadPage(token);      
-      // this.renderIframe(token);      
+
+      //Login no Híbrido
+      this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.urlAutorizador);
     }
 
     this.initializeEventListeners();
-
   }
 
   removeExistentsScripts(){
@@ -97,56 +107,20 @@ export class AppComponent implements OnInit {
   private async autenticate() {
     const bodyRequest = JSON.stringify({
 
-      //sistemico
-      "user": "jessica",
+      //Unimed São Roque
+      //"user": "secretaria.teste",
+      //"password": "2db7fe506c24f0d5790cbec170a27fa2",      
+      //"clinic": 148,
+      //"provider": "12477",
+      //"beneficiaryCard": "02834124610022818"
+
+      //squad
+      "user": "31921",
       "password": "6657a66f2419358f2267c7788a6dabb8",
+      "cnpjClinic": "03.151.186/0001-78",
       "clinic": 10026,
-      "cnpjClinic": "",
-      "provider": 31921,
-      "beneficiaryCard": "01201000643000017"
-
-        //  "user": "31921",
-        //  "password": "6657a66f2419358f2267c7788a6dabb8",
-        //  "cnpjClinic": "03.151.186/0001-78",
-        //  "clinic": 10026,
-        //  "provider": "31921",
-        //  "beneficiaryCard": "01200108959000048"
-
-        // "user": "daniel.jose",
-        // "password": "261c3b26b737ffc731837e1e35d17b9c",
-        // "clinic": 10026,
-        // "cnpjClinic": "03.151.186/0001-78",
-        // "provider": 31921,
-        // "beneficiaryCard": "01200108959000048"
-
-        // "user": "secretariateste",
-        // "password": "261c3b26b737ffc731837e1e35d17b9c",
-        // "clinic": 10026,
-        // "cnpjClinic": "03.151.186/0001-78",
-        // "provider": 31921,
-        // "beneficiaryCard": "01200108959000048"
-
-        
-        // "user": "31923",
-        // "password": "6657a66f2419358f2267c7788a6dabb8",
-        // "clinic": 10026,
-        // "cnpjClinic": "03.151.186/0001-78",
-        // "provider": 31923,
-        // "beneficiaryCard": "01200108959000048"        
-
-        // "user": "daniel.jose",
-        // "password": "261c3b26b737ffc731837e1e35d17b9c",
-        // "clinic": 10026,
-        // "cnpjClinic": "03.151.186/0001-78",
-        // "provider": 110005,
-        // "beneficiaryCard": "01200108959000048"
-        
-        // "user": "31921",
-        // "password": "1e0a55d2ab93ff0fec2dc379284f05b3",
-        // "cnpjClinic": "03.151.186/0001-78",
-        // "clinic": 10026,
-        // "provider": 31921,
-        // "beneficiaryCard": "01200108959000048"
+      "provider": "31921",
+      //"beneficiaryCard": "01200109168000016"
     });
 
     const options = {
@@ -248,19 +222,19 @@ async checkElegibility() {
   }
 
   novoRegExame() {
-    this.renderIframe('exam-registry.js', 'divIframe');
+    this.renderIframe('exam-registry.js', 'divIframe', { beneficiaryCard: this.beneficiaryCard });
   }
 
   novoRegistroConsulta(){
-    this.renderIframe('consultation-register.js', 'divIframe');
+    this.renderIframe('consultation-register.js', 'divIframe', { beneficiaryCard: this.beneficiaryCard });
   }
 
   novaSolcitacaoExames(){
-    this.renderIframe('exam-request.js');
+    this.renderIframe('exam-request.js', 'divIframe', { beneficiaryCard: this.beneficiaryCard });
   }
 
   novaSolcitacaoInternacao(){
-    this.renderIframe('hospitalization-request.js');
+    this.renderIframe('hospitalization-request.js', 'divIframe', { beneficiaryCard: this.beneficiaryCard });
   }
 
   novaPerfilMedico(){
@@ -280,7 +254,7 @@ async checkElegibility() {
   }
 
   novaPerfilMedicoUsosBenef() {
-    this.renderIframe('medical-profile-beneficiary-use.js');
+    this.renderIframe('medical-profile-beneficiary-use.js', 'divIframe', { beneficiaryCard: this.beneficiaryCard });
   }
 
   novaPerfilMedicoFavoritos() {
@@ -288,7 +262,7 @@ async checkElegibility() {
   }
 
   guiasDoBeneficiario() {
-    this.renderIframe('beneficiary-guides.js');
+    this.renderIframe('beneficiary-guides.js', 'divIframe', { beneficiaryCard: this.beneficiaryCard });
   }
 
   titulosDoPrestador() {
@@ -308,7 +282,7 @@ async checkElegibility() {
   }
 
   historicoAtendimentos() {
-    this.renderIframe('attendance-history.js');
+    this.renderIframe('attendance-history.js', 'divIframe', { beneficiaryCard: this.beneficiaryCard });
   }
 
   justificativaReconsulta() {
@@ -319,7 +293,7 @@ async checkElegibility() {
     this.renderIframe('reprinting-documents.js');
   }
 
-  renderIframe(program:string, divName:string = 'divIframe') {
+  renderIframe(program:string, divName:string = 'divIframe', queryParams?: Record<string, string>) {
     const options = {
         method: 'GET',
         headers: {
@@ -327,8 +301,17 @@ async checkElegibility() {
             'Authorization': `Bearer ${this.token}`
         },
     };
+    
+    // 1. Construção da URL com os Query Params
+    let url = `${this.urlbase}/totvs-hgp-haw-auth/external-integration/${program}`;
 
-    fetch(`${this.urlbase}/totvs-hgp-haw-auth/external-integration/${program}`, options)
+    if (queryParams && Object.keys(queryParams).length > 0) {
+        const params = new URLSearchParams(queryParams).toString();
+        url += `?${params}`;
+    }
+
+    // 2. Chamada fetch usando a URL processada
+    fetch(url, options)
     .then(response => {      
       if (!response.ok) {
         throw new Error("Erro ao buscar módulo embedado");
@@ -348,5 +331,23 @@ async checkElegibility() {
       console.error("Erro ao carregar módulo embedado:", error);
     });
   }
+
+  onLoad() {
+    //Decodifica o token JWT para extrair o hybridToken e iniciar a sessão no HAW
+    const base64Url = this.token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    const payload = JSON.parse(jsonPayload);
+    
+    this.startHawSession(payload['loginData']['hybridToken']);
+  }
+
+  startHawSession(token: string) {
+    let iframe = document.getElementById("wacframe") as HTMLIFrameElement;
+    iframe.contentWindow?.postMessage({token: token}, '*');
+  }  
 
 }
